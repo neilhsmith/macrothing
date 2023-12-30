@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { Loader2 } from "lucide-react"
+import { Loader2, LucideProps } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -18,7 +18,7 @@ const spinnerVariants = cva("text-muted-foreground", {
 })
 
 export interface SpinnerProps
-  extends Omit<React.SVGAttributes<SVGSVGElement>, "speed">,
+  extends Omit<LucideProps, "speed">,
     VariantProps<typeof spinnerVariants> {}
 
 const Spinner = React.forwardRef<SVGSVGElement, SpinnerProps>(

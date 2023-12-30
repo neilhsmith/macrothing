@@ -5,5 +5,9 @@ export const Route = new FileRoute("/").createRoute({
 })
 
 function RootIndexComponent() {
-  return <div>root index component</div>
+  return (
+    <div>
+      <p>root index component</p>
+    </div>
+  )
 }
