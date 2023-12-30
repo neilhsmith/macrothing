@@ -1,30 +1,32 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { ErrorComponent, Router, RouterProvider } from "@tanstack/react-router"
+import { routeTree } from "@/route-tree.gen"
+import { queryClient } from "@/query-client"
+
+import { Spinner } from "@/components/ui/spinner"
+
+const router = new Router({
+  routeTree,
+  defaultPendingComponent: () => (
+    <div className="p-2 text-2xl">
+      <Spinner />
+    </div>
+  ),
+  defaultErrorComponent: ({ error }: { error: unknown }) => (
+    <ErrorComponent error={error} />
+  ),
+  context: {
+    queryClient,
+  },
+  defaultPreload: "intent",
+  defaultPreloadStaleTime: 0,
+})
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router
+  }
+}
 
 export function App() {
-  return (
-    <div className="h-screen bg-background text-foreground">
-      <p>asdfsfsdf</p>
-      <Button>idk</Button>
-      <Card className="w-[250px]">
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
-    </div>
-  )
+  return <RouterProvider router={router} defaultPreload="intent" />
 }
