@@ -1,8 +1,12 @@
 import { ErrorComponent, Router, RouterProvider } from "@tanstack/react-router"
 import { routeTree } from "@/route-tree.gen"
 import { queryClient } from "@/query-client"
+import { PublicClientApplication } from "@azure/msal-browser"
 
 import { Spinner } from "@/components/ui/spinner"
+import { msalConfig } from "@/auth/auth-config"
+
+const msalInstance = new PublicClientApplication(msalConfig)
 
 const router = new Router({
   routeTree,
@@ -15,6 +19,7 @@ const router = new Router({
     <ErrorComponent error={error} />
   ),
   context: {
+    msalInstance,
     queryClient,
   },
   defaultPreload: "intent",

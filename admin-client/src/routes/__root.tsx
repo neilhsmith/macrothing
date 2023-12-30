@@ -1,9 +1,11 @@
+import { IPublicClientApplication } from "@azure/msal-browser"
 import { QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Link, Outlet, rootRouteWithContext } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 
 export const Route = rootRouteWithContext<{
+  msalInstance: IPublicClientApplication
   queryClient: QueryClient
 }>()({
   component: RootComponent,
