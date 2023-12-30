@@ -1,4 +1,4 @@
-import { Configuration, RedirectRequest } from "@azure/msal-browser"
+import { Configuration } from "@azure/msal-browser"
 
 export const msalConfig: Configuration = {
   auth: {
@@ -17,12 +17,4 @@ export const msalConfig: Configuration = {
   system: {
     allowNativeBroker: false, // Disables WAM Broker
   },
-}
-
-export const loginRequest: RedirectRequest = {
-  scopes: ["openid"],
-}
-
-export const graphConfig = {
-  graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
 }

@@ -6,7 +6,7 @@ import { defineConfig } from "vite"
 export default defineConfig({
   plugins: [react(), mkcert()],
   server: {
-    port: 3060,
+    port: 3061,
     // https: {
 
     // }

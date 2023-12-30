@@ -4,11 +4,35 @@ import ReactDOM from "react-dom/client"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { queryClient } from "@/query-client"
 import { App } from "@/app"
+import { msalInstance } from "@/auth/msal"
+import {
+  AuthenticationResult,
+  EventMessage,
+  EventType,
+} from "@azure/msal-browser"
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </React.StrictMode>
-)
+msalInstance.initialize().then(() => {
+  const accounts = msalInstance.getAllAccounts()
+  if (accounts.length > 0) {
+    msalInstance.setActiveAccount(accounts[0])
+  }
+
+  msalInstance.addEventCallback((event: EventMessage) => {
+    if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
+      const payload = event.payload as AuthenticationResult
+      const account = payload.account
+      msalInstance.setActiveAccount(account)
+    }
+  })
+
+  const root = ReactDOM.createRoot(
+    document.getElementById("root") as HTMLElement
+  )
+  root.render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App pca={msalInstance} />
+      </QueryClientProvider>
+    </React.StrictMode>
+  )
+})

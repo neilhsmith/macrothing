@@ -1,12 +1,10 @@
 import { ErrorComponent, Router, RouterProvider } from "@tanstack/react-router"
 import { routeTree } from "@/route-tree.gen"
 import { queryClient } from "@/query-client"
-import { PublicClientApplication } from "@azure/msal-browser"
+import { IPublicClientApplication } from "@azure/msal-browser"
 
 import { Spinner } from "@/components/ui/spinner"
-import { msalConfig } from "@/auth/auth-config"
-
-const msalInstance = new PublicClientApplication(msalConfig)
+import { MsalProvider } from "@azure/msal-react"
 
 const router = new Router({
   routeTree,
@@ -19,7 +17,7 @@ const router = new Router({
     <ErrorComponent error={error} />
   ),
   context: {
-    msalInstance,
+    msalInstance: undefined!,
     queryClient,
   },
   defaultPreload: "intent",
@@ -32,6 +30,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
-export function App() {
-  return <RouterProvider router={router} defaultPreload="intent" />
+export function App({ pca }: { pca: IPublicClientApplication }) {
+  // TODO: connect the pca's navigate to useNavigate
+
+  return (
+    <MsalProvider instance={pca}>
+      <RouterProvider
+        router={router}
+        defaultPreload="intent"
+        context={{ msalInstance: pca }}
+      />
+    </MsalProvider>
+  )
 }
