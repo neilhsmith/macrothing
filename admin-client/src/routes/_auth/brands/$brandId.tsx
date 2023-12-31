@@ -1,7 +1,7 @@
 import { FileRoute } from "@tanstack/react-router"
 import { z } from "zod"
 
-export const Route = new FileRoute("/brands/$brandId").createRoute({
+export const Route = new FileRoute("/_auth/brands/$brandId").createRoute({
   parseParams: ({ brandId }) => ({
     brandId: z.number().int().parse(Number(brandId)),
   }),

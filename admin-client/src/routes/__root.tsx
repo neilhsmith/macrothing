@@ -1,20 +1,30 @@
-import { IPublicClientApplication, InteractionType } from "@azure/msal-browser"
-import { MsalAuthenticationTemplate } from "@azure/msal-react"
+import { IPublicClientApplication } from "@azure/msal-browser"
 import { QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { Link, Outlet, rootRouteWithContext } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 
-export const Route = rootRouteWithContext<{
+type RootRouteContext = {
   msalInstance: IPublicClientApplication
   queryClient: QueryClient
-}>()({
+}
+
+export const Route = rootRouteWithContext<RootRouteContext>()({
   component: RootComponent,
 })
 
 function RootComponent() {
+  // const { msalInstance } = Route.useRouteContext()
+
+  // useLayoutEffect(() => {
+  //   if (msalInstance.getAllAccounts().length === 0) {
+  //     msalInstance.loginRedirect()
+  //   }
+  // }, [msalInstance])
+
   return (
-    <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}>
+    <>
+      {/* <MsalAuthenticationTemplate interactionType={InteractionType.Redirect}> */}
       <div className="min-h-screen flex flex-col">
         <header role="banner" className="border-b">
           <div className="container flex justify-between items-center">
@@ -40,6 +50,7 @@ function RootComponent() {
       </div>
       <ReactQueryDevtools />
       <TanStackRouterDevtools />
-    </MsalAuthenticationTemplate>
+      {/* </MsalAuthenticationTemplate> */}
+    </>
   )
 }

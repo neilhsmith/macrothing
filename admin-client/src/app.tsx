@@ -34,12 +34,12 @@ export function App({ pca }: { pca: IPublicClientApplication }) {
   // TODO: connect the pca's navigate to useNavigate
 
   return (
-    <MsalProvider instance={pca}>
-      <RouterProvider
-        router={router}
-        defaultPreload="intent"
-        context={{ msalInstance: pca }}
-      />
-    </MsalProvider>
+    // <MsalProvider instance={pca}>
+    <RouterProvider
+      router={router}
+      defaultPreload="intent"
+      context={{ msalInstance: pca }}
+    />
+    // </MsalProvider>
   )
 }
