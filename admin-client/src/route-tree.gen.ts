@@ -1,30 +1,26 @@
 import { Route as rootRoute } from "./routes/__root"
+import { Route as ProfileRoute } from "./routes/profile"
 import { Route as LoginRoute } from "./routes/login"
-import { Route as AuthRoute } from "./routes/_auth"
 import { Route as IndexRoute } from "./routes"
-import { Route as AuthProfileRoute } from "./routes/_auth/profile"
-import { Route as AuthBrandsBrandIdRoute } from "./routes/_auth/brands/$brandId"
-import { Route as AuthBrandsIndexRoute } from "./routes/_auth/brands"
+import { Route as BrandsBrandIdRoute } from "./routes/brands/$brandId"
+import { Route as BrandsIndexRoute } from "./routes/brands"
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
       parentRoute: typeof rootRoute
     }
-    "/_auth": {
-      parentRoute: typeof rootRoute
-    }
     "/login": {
       parentRoute: typeof rootRoute
     }
-    "/_auth/profile": {
-      parentRoute: typeof AuthRoute
+    "/profile": {
+      parentRoute: typeof rootRoute
     }
-    "/_auth/brands/": {
-      parentRoute: typeof AuthRoute
+    "/brands/": {
+      parentRoute: typeof rootRoute
     }
-    "/_auth/brands/$brandId": {
-      parentRoute: typeof AuthRoute
+    "/brands/$brandId": {
+      parentRoute: typeof rootRoute
     }
   }
 }
@@ -34,37 +30,30 @@ Object.assign(IndexRoute.options, {
   getParentRoute: () => rootRoute,
 })
 
-Object.assign(AuthRoute.options, {
-  id: "/_auth",
-  getParentRoute: () => rootRoute,
-})
-
 Object.assign(LoginRoute.options, {
   path: "/login",
   getParentRoute: () => rootRoute,
 })
 
-Object.assign(AuthProfileRoute.options, {
+Object.assign(ProfileRoute.options, {
   path: "/profile",
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => rootRoute,
 })
 
-Object.assign(AuthBrandsIndexRoute.options, {
+Object.assign(BrandsIndexRoute.options, {
   path: "/brands/",
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => rootRoute,
 })
 
-Object.assign(AuthBrandsBrandIdRoute.options, {
+Object.assign(BrandsBrandIdRoute.options, {
   path: "/brands/$brandId",
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => rootRoute,
 })
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  AuthRoute.addChildren([
-    AuthProfileRoute,
-    AuthBrandsIndexRoute,
-    AuthBrandsBrandIdRoute,
-  ]),
   LoginRoute,
+  ProfileRoute,
+  BrandsIndexRoute,
+  BrandsBrandIdRoute,
 ])
