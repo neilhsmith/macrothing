@@ -6,7 +6,7 @@ export const msalConfig: Configuration = {
     authority:
       "https://macrothing.b2clogin.com/macrothing.onmicrosoft.com/B2C_1_SignUpSignIn",
     knownAuthorities: ["macrothing.b2clogin.com"],
-    redirectUri: "https://localhost:3061",
+    redirectUri: "https://localhost:3061/oidc-callback",
     postLogoutRedirectUri: "https://localhost:3061",
     navigateToLoginRequestUrl: false,
   },

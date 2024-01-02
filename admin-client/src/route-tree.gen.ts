@@ -1,26 +1,26 @@
 import { Route as rootRoute } from "./routes/__root"
-import { Route as ProfileRoute } from "./routes/profile"
 import { Route as LoginRoute } from "./routes/login"
+import { Route as AuthRoute } from "./routes/_auth"
 import { Route as IndexRoute } from "./routes"
-import { Route as BrandsBrandIdRoute } from "./routes/brands/$brandId"
-import { Route as BrandsIndexRoute } from "./routes/brands"
+import { Route as AuthProfileRoute } from "./routes/_auth.profile"
+import { Route as AuthOidcCallbackRoute } from "./routes/_auth.oidc-callback"
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
     "/": {
       parentRoute: typeof rootRoute
     }
+    "/_auth": {
+      parentRoute: typeof rootRoute
+    }
     "/login": {
       parentRoute: typeof rootRoute
     }
-    "/profile": {
-      parentRoute: typeof rootRoute
+    "/_auth/oidc-callback": {
+      parentRoute: typeof AuthRoute
     }
-    "/brands/": {
-      parentRoute: typeof rootRoute
-    }
-    "/brands/$brandId": {
-      parentRoute: typeof rootRoute
+    "/_auth/profile": {
+      parentRoute: typeof AuthRoute
     }
   }
 }
@@ -30,30 +30,28 @@ Object.assign(IndexRoute.options, {
   getParentRoute: () => rootRoute,
 })
 
+Object.assign(AuthRoute.options, {
+  id: "/_auth",
+  getParentRoute: () => rootRoute,
+})
+
 Object.assign(LoginRoute.options, {
   path: "/login",
   getParentRoute: () => rootRoute,
 })
 
-Object.assign(ProfileRoute.options, {
+Object.assign(AuthOidcCallbackRoute.options, {
+  path: "/oidc-callback",
+  getParentRoute: () => AuthRoute,
+})
+
+Object.assign(AuthProfileRoute.options, {
   path: "/profile",
-  getParentRoute: () => rootRoute,
-})
-
-Object.assign(BrandsIndexRoute.options, {
-  path: "/brands/",
-  getParentRoute: () => rootRoute,
-})
-
-Object.assign(BrandsBrandIdRoute.options, {
-  path: "/brands/$brandId",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AuthRoute,
 })
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
+  AuthRoute.addChildren([AuthOidcCallbackRoute, AuthProfileRoute]),
   LoginRoute,
-  ProfileRoute,
-  BrandsIndexRoute,
-  BrandsBrandIdRoute,
 ])
