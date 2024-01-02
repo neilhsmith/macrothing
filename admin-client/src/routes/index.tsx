@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { useIsAuthenticated } from "@azure/msal-react"
+import { useIsAuthenticated, useMsal } from "@azure/msal-react"
 import { FileRoute } from "@tanstack/react-router"
 
 export const Route = new FileRoute("/").createRoute({
@@ -7,7 +7,7 @@ export const Route = new FileRoute("/").createRoute({
 })
 
 function IndexRouteComponent() {
-  const { msalInstance } = Route.useRouteContext()
+  const { instance } = useMsal()
   const isAuthenticated = useIsAuthenticated()
 
   return isAuthenticated ? (
@@ -15,7 +15,7 @@ function IndexRouteComponent() {
   ) : (
     <Button
       onClick={() =>
-        msalInstance.loginRedirect({ scopes: ["openid"], state: "abc123" })
+        instance.loginRedirect({ scopes: ["User.Read"], state: "abc123" })
       }
     >
       login
