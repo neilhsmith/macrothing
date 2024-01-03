@@ -37,18 +37,22 @@ namespace Macrothing.Api.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("IDPId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NormalizedEmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Oid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmailAddress")
                         .IsUnique();
 
-                    b.HasIndex("IDPId")
+                    b.HasIndex("Oid")
                         .IsUnique();
 
                     b.ToTable("Users");

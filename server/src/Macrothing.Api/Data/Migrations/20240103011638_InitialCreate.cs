@@ -17,8 +17,9 @@ namespace Macrothing.Api.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IDPId = table.Column<int>(type: "int", nullable: false),
+                    Oid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NormalizedEmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -34,9 +35,9 @@ namespace Macrothing.Api.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_IDPId",
+                name: "IX_Users_Oid",
                 table: "Users",
-                column: "IDPId",
+                column: "Oid",
                 unique: true);
         }
 

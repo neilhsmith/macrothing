@@ -13,7 +13,7 @@ public sealed class AppDbContext : DbContext
   protected override void OnModelCreating(ModelBuilder builder)
   {
     builder.Entity<User>()
-      .HasIndex(u => u.IDPId)
+      .HasIndex(u => u.Oid)
       .IsUnique();
     builder.Entity<User>()
       .HasIndex(u => u.EmailAddress)
