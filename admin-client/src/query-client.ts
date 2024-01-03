@@ -1,5 +1,5 @@
+import { ProblemDetails } from "@/api/generated"
 import { QueryClient } from "@tanstack/react-query"
-import { ProblemDetail } from "@/api/types"
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,6 +11,6 @@ export const queryClient = new QueryClient({
 
 declare module "@tanstack/react-query" {
   interface Register {
-    defaultError: ProblemDetail
+    defaultError: ProblemDetails
   }
 }

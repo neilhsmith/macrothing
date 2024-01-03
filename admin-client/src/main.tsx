@@ -1,8 +1,6 @@
 import "./index.css"
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { QueryClientProvider } from "@tanstack/react-query"
-import { queryClient } from "@/query-client"
 import { App } from "@/app"
 import { msalInstance } from "@/auth/msal"
 import {
@@ -30,9 +28,7 @@ msalInstance.initialize().then(() => {
   )
   root.render(
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <App pca={msalInstance} />
-      </QueryClientProvider>
+      <App pca={msalInstance} />
     </React.StrictMode>
   )
 })
