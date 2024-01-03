@@ -6,6 +6,8 @@ import { IPublicClientApplication } from "@azure/msal-browser"
 import { Spinner } from "@/components/ui/spinner"
 import { MsalProvider } from "@azure/msal-react"
 
+import "@/api/api-client"
+
 const router = new Router({
   routeTree,
   defaultPendingComponent: () => (

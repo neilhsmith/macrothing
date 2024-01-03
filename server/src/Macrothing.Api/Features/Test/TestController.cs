@@ -18,7 +18,7 @@ public class TestsController : ControllerBase
     _logger = logger;
   }
 
-  [HttpGet]
+  [HttpGet(Name = "HelloWorld")]
   [RequiredScope(RequiredScopesConfigurationKey = "Scopes:Read")]
   public string HelloWorld()
   {

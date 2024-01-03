@@ -15,7 +15,13 @@ function IndexRouteComponent() {
   ) : (
     <Button
       onClick={() =>
-        instance.loginRedirect({ scopes: ["User.Read"], state: "abc123" })
+        instance.loginRedirect({
+          scopes: [
+            "https://macrothing.onmicrosoft.com/macrothing-api/Api.Read",
+            "https://macrothing.onmicrosoft.com/macrothing-api/Api.Write",
+          ],
+          state: "abc123",
+        })
       }
     >
       login

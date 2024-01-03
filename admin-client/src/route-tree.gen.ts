@@ -1,6 +1,7 @@
 import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthRoute } from "./routes/_auth"
 import { Route as IndexRoute } from "./routes"
+import { Route as AuthTestRoute } from "./routes/_auth.test"
 import { Route as AuthProfileRoute } from "./routes/_auth.profile"
 import { Route as AuthOidcCallbackRoute } from "./routes/_auth.oidc-callback"
 
@@ -16,6 +17,9 @@ declare module "@tanstack/react-router" {
       parentRoute: typeof AuthRoute
     }
     "/_auth/profile": {
+      parentRoute: typeof AuthRoute
+    }
+    "/_auth/test": {
       parentRoute: typeof AuthRoute
     }
   }
@@ -41,7 +45,16 @@ Object.assign(AuthProfileRoute.options, {
   getParentRoute: () => AuthRoute,
 })
 
+Object.assign(AuthTestRoute.options, {
+  path: "/test",
+  getParentRoute: () => AuthRoute,
+})
+
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  AuthRoute.addChildren([AuthOidcCallbackRoute, AuthProfileRoute]),
+  AuthRoute.addChildren([
+    AuthOidcCallbackRoute,
+    AuthProfileRoute,
+    AuthTestRoute,
+  ]),
 ])
