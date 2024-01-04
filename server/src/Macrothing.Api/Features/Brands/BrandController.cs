@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,32 @@ public class BrandsController : ControllerBase
     var query = new GetBrandSummary.Query(id);
     var response = await _mediator.Send(query, cancellationToken);
 
+    return Ok(response);
+  }
+
+  [ProducesResponseType(200)]
+  [HttpGet(Name = "GetBrandSummaries")]
+  [RequiredScope(RequiredScopesConfigurationKey = "Scopes:Read")]
+  public async Task<ActionResult<PagedList<BrandSummaryDto>>> GetBrandSummaries(
+    [FromQuery] BrandPaginationParametersRequest dto, CancellationToken cancellationToken)
+  {
+    var query = new GetBrandSummaries.Query(dto);
+    var response = await _mediator.Send(query, cancellationToken);
+
+    var paginationMetadata = new
+    {
+      totalCount = response.TotalCount,
+      pageSize = response.PageSize,
+      currentPageSize = response.CurrentPageSize,
+      currentStartIndex = response.CurrentStartIndex,
+      currentEndIndex = response.CurrentEndIndex,
+      pageNumber = response.PageNumber,
+      totalPages = response.TotalPages,
+      hasPrevious = response.HasPrevious,
+      hasNext = response.HasNext
+    };
+
+    Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
     return Ok(response);
   }
 
