@@ -8,6 +8,7 @@
         "generatorName": "typescript-axios",
         "output": "#{cwd}/src/api/generated/v1.0/",
         "inputSpec": "https://localhost:5020/swagger/v1/swagger.json",
+        "templateDir": "#{cwd}/.openapi-generator/templates",
         "additionalProperties": {
           "supportsES6": true,
           "withInterfaces": true,
