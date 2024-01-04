@@ -1,5 +1,5 @@
 import { apiClient } from "@/api/api-client"
-import { TestsApi } from "@/api/generated"
+import { TestsApi } from "@/api/generated/v1.0"
 import { queryOptions } from "@tanstack/react-query"
 
 const api = new TestsApi(undefined, "https://localhost:5020", apiClient)

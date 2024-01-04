@@ -1,0 +1,15 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+base.ts
+common.ts
+configuration.ts
+git_push.sh
+index.ts
+models/index.ts
+models/initiate-user-request.ts
+models/problem-details.ts
+models/tests-api.ts
+models/user-dto.ts
+models/users-api.ts
