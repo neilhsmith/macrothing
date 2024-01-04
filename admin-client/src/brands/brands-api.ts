@@ -2,6 +2,7 @@ import {
   BrandSummaryDto,
   BrandsApi,
   CreateBrandRequest,
+  DeleteBrandsRequest,
   UpdateBrandRequest,
 } from "@/api/generated/v1.0"
 import { PaginatedList, getPaginationMetadata } from "@/api/pagination"
@@ -11,6 +12,7 @@ import {
   queryOptions,
   useMutation,
 } from "@tanstack/react-query"
+import { toast } from "sonner"
 
 const api = new BrandsApi()
 
@@ -46,6 +48,7 @@ export const useCreateBrandMutation = () =>
       return res.data
     },
     onSuccess: (data) => {
+      toast.success("Brand created")
       queryClient.setQueryData(["brands", "get", data.id], data)
       queryClient.invalidateQueries({ queryKey: ["get-brand-summaries"] })
     },
@@ -59,6 +62,7 @@ export const useUpdateBrandMutation = (brandId: number) =>
       return res.data
     },
     onSuccess: (data) => {
+      toast.success("Brand updated")
       queryClient.setQueryData(["brands", "get", brandId], data)
       queryClient.invalidateQueries({ queryKey: ["brands", "list"] })
     },
@@ -71,7 +75,21 @@ export const useDeleteBrandMutation = (brandId: number) =>
       return res.data
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["brands", "get", brandId] })
+      toast.success("Brand deleted")
+      queryClient.removeQueries({ queryKey: ["brands", "get", brandId] })
       queryClient.invalidateQueries({ queryKey: ["brands", "list"] })
+      queryClient.invalidateQueries({ queryKey: ["brands", "update"] })
+    },
+  })
+
+export const useDeleteBrandsMutation = () =>
+  useMutation({
+    mutationFn: async (payload: DeleteBrandsRequest) => {
+      const res = await api.deleteBrands(payload)
+      return res.data
+    },
+    onSuccess: (data) => {
+      toast.success(`Deleted ${data} Brands`)
+      queryClient.invalidateQueries({ queryKey: ["brands"] })
     },
   })

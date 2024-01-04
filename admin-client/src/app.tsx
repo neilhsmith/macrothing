@@ -3,10 +3,9 @@ import { routeTree } from "@/route-tree.gen"
 import { QueryClientProvider } from "@tanstack/react-query"
 import { queryClient } from "@/query-client"
 import { IPublicClientApplication } from "@azure/msal-browser"
-
+import { Toaster } from "sonner"
 import { Spinner } from "@/components/ui/spinner"
 import { MsalProvider } from "@azure/msal-react"
-
 import { Center } from "@/components/ui/center"
 
 const router = new Router({
@@ -46,6 +45,7 @@ export function App({ msalClient }: { msalClient: IPublicClientApplication }) {
           defaultPreload="intent"
           context={{ msalClient }}
         />
+        <Toaster />
       </MsalProvider>
     </QueryClientProvider>
   )
