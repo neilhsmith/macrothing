@@ -10,9 +10,11 @@ index.ts
 package/brand-summary-dto.ts
 package/brands-api.ts
 package/create-brand-request.ts
+package/delete-brands-request.ts
 package/index.ts
 package/initiate-user-request.ts
 package/problem-details.ts
 package/tests-api.ts
+package/update-brand-request.ts
 package/user-dto.ts
 package/users-api.ts

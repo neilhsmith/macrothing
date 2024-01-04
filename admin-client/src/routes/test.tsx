@@ -1,7 +1,7 @@
 import { helloWorldQueryOptions } from "@/tests/tests-api"
 import { FileRoute } from "@tanstack/react-router"
 
-export const Route = new FileRoute("/_auth/test").createRoute({
+export const Route = new FileRoute("/test").createRoute({
   loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(helloWorldQueryOptions()),
   component: TestRouteComponent,
