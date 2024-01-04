@@ -8,7 +8,8 @@
     "build": "tsc && tsr generate && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "codegen": "SET JAVA_OPTS=-Dio.swagger.parser.util.RemoteUrl.trustAll=true -Dio.swagger.v3.parser.util.RemoteUrl.trustAll=true && openapi-generator-cli generate"
+    "codegen:clean": "del-cli \"src/api/generated/**/*\"",
+    "codegen": "SET JAVA_OPTS=-Dio.swagger.parser.util.RemoteUrl.trustAll=true -Dio.swagger.v3.parser.util.RemoteUrl.trustAll=true && npm run codegen:clean && openapi-generator-cli generate"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.6.0",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.16",
     "concurrently": "^8.2.2",
+    "del-cli": "^5.1.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
