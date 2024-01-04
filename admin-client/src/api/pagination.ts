@@ -3,7 +3,15 @@ import { z } from "zod"
 
 export type PaginationParams = z.infer<typeof paginationParamsSchema>
 export const paginationParamsSchema = z.object({
-  page: z.number().catch(1),
+  pageNumber: z.number().default(1),
+  pageSize: z.number().default(10),
+})
+
+// the same pagination params type & schema but this catches instead of setting a default
+// value. useful during the router's validateSearch to avoid rendering the error component
+export type SafePaginationParams = z.infer<typeof safePaginationParamsSchema>
+export const safePaginationParamsSchema = z.object({
+  pageNumber: z.number().catch(1),
   pageSize: z.number().catch(10),
 })
 
