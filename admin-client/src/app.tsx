@@ -22,7 +22,7 @@ const router = new Router({
     <ErrorComponent error={error} />
   ),
   context: {
-    msalInstance: undefined!,
+    msalClient: undefined!,
     queryClient,
   },
   defaultPreload: "intent",
@@ -35,16 +35,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
-export function App({ pca }: { pca: IPublicClientApplication }) {
+export function App({ msalClient }: { msalClient: IPublicClientApplication }) {
   // TODO: connect the pca's navigate to useNavigate
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MsalProvider instance={pca}>
+      <MsalProvider instance={msalClient}>
         <RouterProvider
           router={router}
           defaultPreload="intent"
-          context={{ msalInstance: pca }}
+          context={{ msalClient }}
         />
       </MsalProvider>
     </QueryClientProvider>

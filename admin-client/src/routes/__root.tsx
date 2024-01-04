@@ -6,7 +6,7 @@ import { Outlet, rootRouteWithContext } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 
 type RootRouteContext = {
-  msalInstance: IPublicClientApplication
+  msalClient: IPublicClientApplication
   queryClient: QueryClient
 }
 

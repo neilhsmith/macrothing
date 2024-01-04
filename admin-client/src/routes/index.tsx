@@ -1,3 +1,4 @@
+import { loginRequest } from "@/auth/msal"
 import { Button } from "@/components/ui/button"
 import { useIsAuthenticated, useMsal } from "@azure/msal-react"
 import { FileRoute } from "@tanstack/react-router"
@@ -16,10 +17,7 @@ function IndexRouteComponent() {
     <Button
       onClick={() =>
         instance.loginRedirect({
-          scopes: [
-            "https://macrothing.onmicrosoft.com/macrothing-api/Api.Read",
-            "https://macrothing.onmicrosoft.com/macrothing-api/Api.Write",
-          ],
+          ...loginRequest,
           state: "abc123",
         })
       }
