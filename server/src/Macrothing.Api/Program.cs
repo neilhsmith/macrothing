@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hellang.Middleware.ProblemDetails;
+using Macrothing.Api.Application;
 using Macrothing.Api.Configurations;
 using Macrothing.Api.Data;
 using Macrothing.Api.Extensions;
@@ -53,6 +54,7 @@ builder.Services.AddSwaggerGen(options =>
   var swaggerAuthClientOptions = builder.Configuration.GetSwaggerAuthClientOptions();
 
   options.SupportNonNullableReferenceTypes();
+  options.SchemaFilter<RequiredNotNullableSchemaFilter>();
 
   options.SwaggerDoc("v1", new OpenApiInfo
   {

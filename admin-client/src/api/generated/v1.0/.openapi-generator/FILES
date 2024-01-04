@@ -6,6 +6,9 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
+models/brand-summary-dto.ts
+models/brands-api.ts
+models/create-brand-request.ts
 models/index.ts
 models/initiate-user-request.ts
 models/problem-details.ts

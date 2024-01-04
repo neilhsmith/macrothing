@@ -25,13 +25,13 @@ export interface UserDto {
      * @type {number}
      * @memberof UserDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * 
      * @type {string}
      * @memberof UserDto
      */
-    'createdAt'?: string;
+    'createdAt': string;
     /**
      * 
      * @type {string}
@@ -43,6 +43,6 @@ export interface UserDto {
      * @type {string}
      * @memberof UserDto
      */
-    'emailAddress'?: string;
+    'emailAddress': string;
 }
 

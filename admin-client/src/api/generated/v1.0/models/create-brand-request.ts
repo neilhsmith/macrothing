@@ -14,7 +14,17 @@
 
 
 
-export * from './models/brands-api';
-export * from './models/tests-api';
-export * from './models/users-api';
+/**
+ * 
+ * @export
+ * @interface CreateBrandRequest
+ */
+export interface CreateBrandRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBrandRequest
+     */
+    'name': string;
+}
 

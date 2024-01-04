@@ -1,5 +1,5 @@
-import { ProblemDetails } from "@/api/generated-og"
 import { QueryClient } from "@tanstack/react-query"
+import { ProblemDetails } from "@/api/generated/v1.0"
 
 export const queryClient = new QueryClient({
   defaultOptions: {

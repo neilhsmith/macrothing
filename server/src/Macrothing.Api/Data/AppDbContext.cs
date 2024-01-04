@@ -1,4 +1,5 @@
 using Macrothing.Api.Features;
+using Macrothing.Api.Features.Brands;
 using Macrothing.Api.Features.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,12 +7,17 @@ namespace Macrothing.Api.Data;
 
 public sealed class AppDbContext : DbContext
 {
+  public DbSet<Brand> Brands { get; set; }
   public DbSet<User> Users { get; set; }
 
   public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {
+    builder.Entity<Brand>()
+      .HasIndex(b => b.Name)
+      .IsUnique();
+
     builder.Entity<User>()
       .HasIndex(u => u.Oid)
       .IsUnique();

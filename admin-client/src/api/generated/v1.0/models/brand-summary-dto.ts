@@ -17,20 +17,32 @@
 /**
  * 
  * @export
- * @interface InitiateUserRequest
+ * @interface BrandSummaryDto
  */
-export interface InitiateUserRequest {
+export interface BrandSummaryDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof BrandSummaryDto
+     */
+    'id': number;
     /**
      * 
      * @type {string}
-     * @memberof InitiateUserRequest
+     * @memberof BrandSummaryDto
      */
-    'oid': string;
+    'createdAt': string;
     /**
      * 
      * @type {string}
-     * @memberof InitiateUserRequest
+     * @memberof BrandSummaryDto
      */
-    'emailAddress': string;
+    'modifiedAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BrandSummaryDto
+     */
+    'name': string;
 }
 
