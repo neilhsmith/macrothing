@@ -14,7 +14,7 @@
 
 
 
-export * from './models/brands-api';
-export * from './models/tests-api';
-export * from './models/users-api';
+export * from './package/brands-api';
+export * from './package/tests-api';
+export * from './package/users-api';
 

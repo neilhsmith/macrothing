@@ -22,11 +22,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { BrandSummaryDto } from '../models';
+import { BrandSummaryDto } from '../package';
 // @ts-ignore
-import { CreateBrandRequest } from '../models';
+import { CreateBrandRequest } from '../package';
 // @ts-ignore
-import { ProblemDetails } from '../models';
+import { ProblemDetails } from '../package';
 /**
  * BrandsApi - axios parameter creator
  * @export
